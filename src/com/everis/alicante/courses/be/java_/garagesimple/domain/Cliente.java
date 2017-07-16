@@ -3,6 +3,11 @@ package com.everis.alicante.courses.be.java_.garagesimple.domain;
 public class Cliente {
 	private String nif;
 	private String nombreCompleto;
+	
+	public Cliente (String nif, String nombreCompleto){
+		this.nif= nif;
+		this.nombreCompleto= nombreCompleto;
+	}
 
 	public String getNif() {
 		return nif;
@@ -19,14 +24,10 @@ public class Cliente {
 	public void setNombreCompleto(String nombreCompleto) {
 		this.nombreCompleto = nombreCompleto;
 	}
-
-	public Vehiculo getVehiculo() {
-		return vehiculo;
+	
+	@Override
+	public String toString() {
+		return "Cliente [nif=" + nif + ", nombreCompleto=" + nombreCompleto + "]";
 	}
-
-	public void setVehiculo(Vehiculo vehiculo) {
-		this.vehiculo = vehiculo;
-	}
-
-	private Vehiculo vehiculo;
+	
 }

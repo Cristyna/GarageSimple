@@ -1,0 +1,52 @@
+package com.everis.alicante.courses.be.java_.garagesimple.domain;
+
+public class GarageMainCris {
+	
+	public static Cliente[] clientes = new Cliente[4];
+	
+	public static Vehiculo[] vehiculos = new Vehiculo[5];
+	
+	public static Plaza[] plazas=new Plaza[30];
+	
+	public static Garage g = new Garage(plazas);
+
+
+	public static void main(String[] args) {
+		//inicializar los componentes de la aplicación
+		inicializarComponentes();
+		System.out.println("hola");
+	}
+	
+	public static void inicializarComponentes() {
+		
+		//4 clientes
+		clientes[1]=new Cliente("74011290G","Shassa Miau Miau");
+		clientes[2]=new Cliente("48521478K","Troklos Miau Miau");
+		clientes[3]=new Cliente("78917895S","Rosita Miau Miau");
+		clientes[4]=new Cliente("12345678F","Pirata Miau Miau");
+		
+		
+		//5 vehiculos 
+		vehiculos[1]=new Coche("5719BKJ", clientes[2]);
+		vehiculos[2]=new Coche("4952GHR", clientes[1]);
+		vehiculos[3]=new Motocicleta("8621OKG", clientes[1]);
+		vehiculos[4]=new Motocicleta("1287HYR", clientes[3]);
+		vehiculos[5]=new Camion("5697ESU", clientes[4]);
+		
+		//30 plazas de garaje
+		
+		for (int i=0;i==29;i++){
+			if(i<10) {
+				plazas[i] = new Plaza(50);
+			}
+			else {
+				plazas[i] = new Plaza(60);
+			}
+		}
+		
+		
+	}
+	
+	
+
+}
