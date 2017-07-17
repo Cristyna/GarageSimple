@@ -4,10 +4,10 @@ public class Motocicleta extends Vehiculo implements Aparcable {
 
 	private String marca;
 
-	public Motocicleta(String marca, String matricula, Cliente cliente) {
-		super(matricula, cliente);
-		this.marca = marca;
-	}
+//	public Motocicleta(String marca, String matricula, Cliente cliente) {
+//		super(matricula, cliente);
+//		this.marca = marca;
+//	}
 
 	public String getMarca() {
 		return marca;
@@ -22,10 +22,10 @@ public class Motocicleta extends Vehiculo implements Aparcable {
 		System.out.println("Puedo aparcar");
 
 	}
-
-	@Override
-	public String toString() {
-		return "Motocicleta [marca=" + marca + ", matricula=" + matricula + ", cliente=" + cliente + "]";
-	}
+//
+//	@Override
+//	public String toString() {
+//		return "Motocicleta [marca=" + marca + ", matricula=" + matricula + ", cliente=" + cliente + "]";
+//	}
 
 }

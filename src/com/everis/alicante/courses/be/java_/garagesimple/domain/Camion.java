@@ -4,10 +4,10 @@ public class Camion extends Vehiculo {
 
 	private String marca;
 
-	public Camion(String marca, String matricula, Cliente cliente) {
-		super(matricula, cliente);
-		this.marca = marca;
-	}
+//	public Camion(String marca, String matricula, Cliente cliente) {
+//		super(matricula, cliente);
+//		this.marca = marca;
+//	}
 
 	public String getMarca() {
 		return marca;
@@ -17,10 +17,10 @@ public class Camion extends Vehiculo {
 		this.marca = marca;
 	}
 
-	@Override
-	public String toString() {
-		return "Camion [marca=" + marca + ", matricula=" + matricula + ", cliente=" + cliente + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Camion [marca=" + marca + ", matricula=" + matricula + ", cliente=" + cliente + "]";
+//	}
 
 	
 
