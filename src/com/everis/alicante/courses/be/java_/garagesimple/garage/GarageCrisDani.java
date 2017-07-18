@@ -1,4 +1,4 @@
-package com.everis.alicante.courses.be.java_.garagesimple.domain;
+package com.everis.alicante.courses.be.java_.garagesimple.garage;
 /*package com.everis.alicante.courses.be.java_.garagesimple.domain;
 
 import java.util.ArrayList;

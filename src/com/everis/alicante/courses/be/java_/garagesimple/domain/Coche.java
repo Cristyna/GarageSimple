@@ -1,5 +1,7 @@
 package com.everis.alicante.courses.be.java_.garagesimple.domain;
 
+import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.Aparcable;
+
 public class Coche extends Vehiculo implements Aparcable {
 
 	private String marca;

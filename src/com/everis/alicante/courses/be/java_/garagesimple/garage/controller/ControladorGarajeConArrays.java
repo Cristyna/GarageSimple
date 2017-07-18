@@ -1,8 +1,19 @@
-package com.everis.alicante.courses.be.java_.garagesimple.domain;
+package com.everis.alicante.courses.be.java_.garagesimple.garage.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.everis.alicante.courses.be.java_.garagesimple.domain.Camion;
+import com.everis.alicante.courses.be.java_.garagesimple.domain.Cliente;
+import com.everis.alicante.courses.be.java_.garagesimple.domain.Coche;
+import com.everis.alicante.courses.be.java_.garagesimple.domain.Garage;
+import com.everis.alicante.courses.be.java_.garagesimple.domain.Motocicleta;
+import com.everis.alicante.courses.be.java_.garagesimple.domain.Plaza;
+import com.everis.alicante.courses.be.java_.garagesimple.domain.Vehiculo;
+import com.everis.alicante.courses.be.java_.garagesimple.garage.GarageMainProfe;
+import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.Aparcable;
+import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.ControladorGaraje;
 
 public class ControladorGarajeConArrays implements ControladorGaraje {
 
@@ -28,7 +39,8 @@ public class ControladorGarajeConArrays implements ControladorGaraje {
 
 	@Override
 	public void listarPlazasOcupadas() {
-List<Plaza> plazaslibres= new ArrayList<Plaza>();
+		
+		List<Plaza> plazasOcupadas=new ArrayList<Plaza>();
 		
 		Plaza[] plazas= GarageMainProfe.getGaraje().getPlazas();
 		
@@ -36,12 +48,12 @@ List<Plaza> plazaslibres= new ArrayList<Plaza>();
 			Plaza plaza = plazas[i];
 			
 			if(!plaza.getLibre()) {
-				listarPlazasOcupadas.add(plaza);
+				plazasOcupadas.add(plaza);
 			}
 			
 		}
 		//listar por pantalla
-		for (Plaza plaza : listarPlazasOcupadas) {
+		for (Plaza plaza : plazasOcupadas) {
 			System.out.println(plaza);
 		}
 		
@@ -53,6 +65,7 @@ List<Plaza> plazaslibres= new ArrayList<Plaza>();
 		Cliente cliente = new Cliente();
 
 		// vamos a escribir por pantalla un menu para meter los datos del cliente
+		// si hay plazas libres seteamos un cliente a la plaza que queramos
 	
 		System.out.println("Por favor introduce tus datos para reservar la plaza");
 		
@@ -102,7 +115,7 @@ List<Plaza> plazaslibres= new ArrayList<Plaza>();
 			}
 						
 		cliente.setVehiculo(vehiculo);
-		in.close();
+		
 		// logica de si hay vacias
 		boolean hayplaza = false;
 		Garage garaje = GarageMainProfe.getGaraje();
@@ -121,6 +134,6 @@ List<Plaza> plazaslibres= new ArrayList<Plaza>();
 		}
 		return hayplaza;
 	}
-	// si hay plazas libres seteamos un cliente a la plaza que queramos
+	
 
 }
