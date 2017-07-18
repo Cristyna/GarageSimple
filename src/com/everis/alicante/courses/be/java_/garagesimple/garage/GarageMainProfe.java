@@ -1,11 +1,15 @@
 package com.everis.alicante.courses.be.java_.garagesimple.garage;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 import com.everis.alicante.courses.be.java_.garagesimple.domain.Garage;
 import com.everis.alicante.courses.be.java_.garagesimple.domain.Plaza;
 import com.everis.alicante.courses.be.java_.garagesimple.garage.controller.ControladorGarajeConArrays;
 import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.ControladorGaraje;
+import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.PlazaDAO;
+import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.Impl.PlazaDAOFileImp;
 
 public class GarageMainProfe {
 
@@ -23,7 +27,7 @@ public class GarageMainProfe {
 
 	static ControladorGaraje controlador;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// inicializar los componentes de la aplicación
 		inicializarComponentes();
 
@@ -37,7 +41,7 @@ public class GarageMainProfe {
 
 	}
 
-	private static void iniciarAplicacion() {
+	private static void iniciarAplicacion() throws IOException {
 		System.out.println("Bienvenido a nuestro garaje, seleccione una opción: ");
 		System.out.println("1: Listar Plazas garaje libres");
 		System.out.println("2: Listar Plazas garaje ocupadas");
@@ -76,43 +80,22 @@ public class GarageMainProfe {
 		iniciarAplicacion();
 	}
 
-	public static void inicializarComponentes() {
+	public static void inicializarComponentes() throws IOException {
 
-		// 30 plazas de garaje
+		// 30 plazas de garaje puesto a ficheros ya
 		garaje = new Garage();
-		Plaza[] plazas = new Plaza[30];
-		for (int i = 0; i < plazas.length; i++) {
-			Plaza plazaTemp = new Plaza();
-			plazaTemp.setNumeroPlaza(i + 1);
-			if (i < 10) {
-				plazaTemp.setPrecio(50);
-
-			} else if (i < 20) {
-				plazaTemp.setPrecio(75);
-
-			} else {
-				plazaTemp.setPrecio(100);
-			}
-			plazas[i] = plazaTemp;
-		}
-
-		garaje.setPlazas(plazas);
-		controlador = new ControladorGarajeConArrays();
-
-		// //4 clientes
-		// clientes.add(new Cliente("74011290G","Shassa Miau Miau"));
-		// clientes.add(new Cliente("48521478K","Troklos Miau Miau"));
-		// clientes.add(new Cliente("78917895S","Rosita Miau Miau"));
-		// clientes.add(new Cliente("12345678F","Pirata Miau Miau"));
-		//
-		//
-		// //5 vehiculos
-		// vehiculos.add(new Coche("SEAT", "5719BKJ", clientes.get(2)));
-		// vehiculos.add(new Coche("Jaguar", "4952GHR", clientes.get(0)));
-		// vehiculos.add(new Motocicleta("Triumph", "8621OKG", clientes.get(0)));
-		// vehiculos.add(new Motocicleta("Suzuki", "1287HYR", clientes.get(3)));
-		// vehiculos.add(new Camion("Pegaso", "5697ESU", clientes.get(1)));
-
+		
+		PlazaDAO plazaDao= new PlazaDAOFileImp();
+		
+		//Plaza[] plazas= plazaDao.readPlazas();
+		
+		List<Plaza>plazasTemp=plazaDao.readPlazas();
+		
+		garaje.setPlazas(plazasTemp);
+		
+		controlador=new ControladorGarajeConArrays();
+				
+		
 	}
 
 }

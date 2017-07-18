@@ -1,29 +1,25 @@
 package com.everis.alicante.courses.be.java_.garagesimple.domain;
 
+import java.util.List;
+
 public class Garage {
 
-	/*
-	 * private ArrayList<Plaza> plazas;
-	 * 
-	 * public Garage(ArrayList<Plaza> plazas) { this.plazas = plazas; }
-	 * 
-	 * public ArrayList<Plaza> getPlazas() { return plazas; }
-	 * 
-	 * public void setPlazas(ArrayList<Plaza> plazas) { this.plazas = plazas; }
-	 * 
-	 * @Override public String toString() { return "Garage [plazas=" + plazas + "]";
-	 * }
-	 */
-	private Plaza[] plazas;
+	private List<Plaza> plazas;
 	private String nombreGaraje;
 
-	public Plaza[] getPlazas() {
+
+
+	public List<Plaza> getPlazas() {
 		return plazas;
 	}
 
-	public void setPlazas(Plaza[] plazas) {
+
+
+	public void setPlazas(List<Plaza> plazas) {
 		this.plazas = plazas;
 	}
+
+
 
 	public String getNombreGaraje() {
 		return nombreGaraje;

@@ -5,6 +5,7 @@ public class Cliente {
 	private String nombreCompleto;
 	private Vehiculo vehiculo;
 	
+	
 //	public Cliente (String nif, String nombreCompleto){
 //		this.nif= nif;
 //		this.nombreCompleto= nombreCompleto;
