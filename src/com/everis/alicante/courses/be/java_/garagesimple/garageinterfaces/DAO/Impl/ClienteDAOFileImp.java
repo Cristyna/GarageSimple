@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import com.everis.alicante.courses.be.java_.garagesimple.domain.Cliente;
 import com.everis.alicante.courses.be.java_.garagesimple.domain.Plaza;
@@ -13,11 +15,12 @@ import com.everis.alicante.courses.be.java_.garagesimple.domain.Reserva;
 import com.everis.alicante.courses.be.java_.garagesimple.garage.GarageMainProfe;
 import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.ClienteDAO;
 
-public class ClienteDOAFileImp implements ClienteDAO {
+public class ClienteDAOFileImp implements ClienteDAO {
 
 	@Override
-	public List<Cliente> readClientes() throws IOException {
-		List<Cliente> clientes= new ArrayList<Cliente>();
+	public Map <String,Cliente> readClientes() throws IOException {
+		
+		Map <String,Cliente> clientes= new TreeMap<String,Cliente>();
 		String linea;
 		
 		File file = new File("src/resources/Clientes.txt");
@@ -37,7 +40,7 @@ public class ClienteDOAFileImp implements ClienteDAO {
 				//clienteTemp.getVehiculo().setMatricula(temp[2]);
 							
 						
-				clientes.add(clienteTemp);
+				clientes.put(clienteTemp.getNif(),clienteTemp);
 			}
 					
 	}

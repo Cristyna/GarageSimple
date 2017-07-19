@@ -4,20 +4,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
-import com.everis.alicante.courses.be.java_.garagesimple.domain.Plaza;
-import com.everis.alicante.courses.be.java_.garagesimple.domain.Reserva;
 import com.everis.alicante.courses.be.java_.garagesimple.domain.Vehiculo;
-import com.everis.alicante.courses.be.java_.garagesimple.garage.GarageMainProfe;
 import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.VehiculoDAO;
 
 public class VehiculoDAOFileImp implements VehiculoDAO {
 
 	@Override
-	public List<Vehiculo> readVehiculo() throws IOException {
-		List<Vehiculo> vehiculos= new ArrayList<Vehiculo>();
+	public Map <String,Vehiculo> readVehiculo() throws IOException {
+		
+		Map <String,Vehiculo> vehiculos= new TreeMap <String,Vehiculo>();
+		
 		String linea;
 		
 		File file = new File("src/resources/Reservas.txt");
@@ -35,9 +34,8 @@ public class VehiculoDAOFileImp implements VehiculoDAO {
 				vehiculo.setMatricula((temp[0]));
 				
 				vehiculo.setTipoVehiculo(temp[1]);
-				
-								
-				vehiculos.add(vehiculo);
+												
+				vehiculos.put(vehiculo.getMatricula(),vehiculo);
 			}
 					
 	}

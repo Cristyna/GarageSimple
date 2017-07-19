@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import com.everis.alicante.courses.be.java_.garagesimple.domain.Plaza;
 import com.everis.alicante.courses.be.java_.garagesimple.domain.Reserva;
@@ -34,9 +36,10 @@ public class ReservaDAOFileImp implements ReservaDAO {
 	}
 
 	@Override
-	public List<Reserva> readReservas() throws IOException {
+	public Map<String,Reserva> readReservas() throws IOException {
 		
-		List<Reserva> reservas= new ArrayList<Reserva>();
+		Map<String,Reserva> reservas= new TreeMap<String,Reserva>();
+		
 		String linea;
 		
 		File file = new File("src/resources/Reservas.txt");
@@ -57,7 +60,11 @@ public class ReservaDAOFileImp implements ReservaDAO {
 				
 				reserva.setPlaza(plaza);
 				
-				reservas.add(reserva);
+				reserva.setCliente(GarageMainProfe.getGaraje().getClientes().get(temp[2]));
+				
+				reserva.getCliente().setVehiculo(GarageMainProfe.getGaraje().getVehiculos().get(temp[3]));
+				
+				reservas.put(reserva.getCodigoReserva(), reserva);
 			}
 					
 	}
