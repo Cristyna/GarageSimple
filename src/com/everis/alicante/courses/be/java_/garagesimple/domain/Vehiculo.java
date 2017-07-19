@@ -1,21 +1,17 @@
 package com.everis.alicante.courses.be.java_.garagesimple.domain;
 
 public class Vehiculo {
-	protected String matricula;
-	//protected Cliente cliente;
 	
-//	public Vehiculo (String matricula, Cliente cliente){
-//		this.matricula= matricula;
-//		this.cliente = cliente;
-//	}
+	private String matricula;
+	private String tipoVehiculo;
 
-//	public Cliente getCliente() {
-//		return cliente;
-//	}
-//
-//	public void setCliente(Cliente cliente) {
-//		this.cliente = cliente;
-//	}
+	public String getTipoVehiculo() {
+		return tipoVehiculo;
+	}
+
+	public void setTipoVehiculo(String tipoVehiculo) {
+		this.tipoVehiculo = tipoVehiculo;
+	}
 
 	public String getMatricula() {
 		return matricula;
@@ -28,8 +24,6 @@ public class Vehiculo {
 	@Override
 	public String toString() {
 		return "Vehiculo [matricula=" + matricula + "]";
-	} 
-	
-
+	}
 
 }

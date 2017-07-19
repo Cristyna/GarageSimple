@@ -45,15 +45,18 @@ public class PlazaDAOFileImp implements PlazaDAO {
 		
 	}
 
-	@Override
-	public void write (Plaza[] plazas) {
-				
-	}
 	
 	public static void main(String args[]) throws IOException {
 		
 		PlazaDAO dao= new PlazaDAOFileImp();
 		dao.readPlazas();
+	}
+
+
+	@Override
+	public void createPlaza (List<Plaza> plazas) {
+		
+		
 	}
 
 }

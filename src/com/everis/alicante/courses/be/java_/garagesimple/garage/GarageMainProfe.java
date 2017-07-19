@@ -4,20 +4,24 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.everis.alicante.courses.be.java_.garagesimple.domain.Cliente;
 import com.everis.alicante.courses.be.java_.garagesimple.domain.Garage;
 import com.everis.alicante.courses.be.java_.garagesimple.domain.Plaza;
-import com.everis.alicante.courses.be.java_.garagesimple.garage.controller.ControladorGarajeConArrays;
+import com.everis.alicante.courses.be.java_.garagesimple.domain.Reserva;
+import com.everis.alicante.courses.be.java_.garagesimple.domain.Vehiculo;
+import com.everis.alicante.courses.be.java_.garagesimple.garage.controller.ControladorGarajeImp;
 import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.ControladorGaraje;
 import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.PlazaDAO;
+import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.ReservaDAO;
 import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.Impl.PlazaDAOFileImp;
+import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.Impl.ReservaDAOFileImp;
 
 public class GarageMainProfe {
 
-	// public static ArrayList<Cliente> clientes = new ArrayList<>();
-	//
-	// public static ArrayList<Vehiculo> vehiculos = new ArrayList<>();
-	//
-	// public static ArrayList<Plaza> plazas = new ArrayList<>();
+	private List<Plaza> plazas;
+	private List<Reserva> Reservas;
+	private List<Vehiculo> Vehiculos;
+	private List<Cliente> Clientes;
 
 	static Garage garaje;
 
@@ -31,10 +35,7 @@ public class GarageMainProfe {
 		// inicializar los componentes de la aplicación
 		inicializarComponentes();
 
-		// System.out.println(clientes.toString()+"\n");
-		// System.out.println(vehiculos.toString()+"\n");
-		// System.out.println(garaje.toString()+"\n");
-
+		
 		// iniciar la aplicacion o listar menu
 
 		iniciarAplicacion();
@@ -82,18 +83,18 @@ public class GarageMainProfe {
 
 	public static void inicializarComponentes() throws IOException {
 
-		// 30 plazas de garaje puesto a ficheros ya
+		
 		garaje = new Garage();
 		
-		PlazaDAO plazaDao= new PlazaDAOFileImp();
+		PlazaDAO plazaDAO= new PlazaDAOFileImp();
+		ReservaDAO reservaDAO= new ReservaDAOFileImp();
 		
-		//Plaza[] plazas= plazaDao.readPlazas();
+			
+		garaje.setPlazas(plazaDAO.readPlazas());
 		
-		List<Plaza>plazasTemp=plazaDao.readPlazas();
+		garaje.setReservas(reservaDAO.readReservas());
 		
-		garaje.setPlazas(plazasTemp);
-		
-		controlador=new ControladorGarajeConArrays();
+		controlador=new ControladorGarajeImp();
 				
 		
 	}

@@ -10,5 +10,5 @@ public interface PlazaDAO {
 	
 	List<Plaza>  readPlazas() throws IOException;
 
-	void write(Plaza[] plazas);
+	void createPlaza(List<Plaza> plazas);
 }

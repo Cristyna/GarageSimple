@@ -5,6 +5,21 @@ import java.util.List;
 public class Garage {
 
 	private List<Plaza> plazas;
+	
+	private List<Reserva> reservas;
+	
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+
+
+
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+
+
+
 	private String nombreGaraje;
 
 

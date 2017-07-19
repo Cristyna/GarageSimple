@@ -20,10 +20,11 @@ import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.Contro
 import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.ReservaDAO;
 import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.Impl.ReservaDAOFileImp;
 
-public class ControladorGarajeConArrays implements ControladorGaraje {
+public class ControladorGarajeImp implements ControladorGaraje {
 
 	@Override
 	public void listarPlazasLibres() {
+		
 		List<Plaza> plazaslibres = new ArrayList<Plaza>();
 
 		List<Plaza> plazas = GarageMainProfe.getGaraje().getPlazas();
@@ -141,8 +142,8 @@ public class ControladorGarajeConArrays implements ControladorGaraje {
 				reserva.setCliente(cliente);
 				reserva.setPlaza(plaza);
 				reserva.setFechaReserva(Calendar.getInstance().getTime());
-				
-				dao.saveReserva(reserva);
+				reserva.setCodigoReserva("AUN NO PODEMOS");
+				dao.createReserva(reserva);
 				
 				return hayplaza;
 

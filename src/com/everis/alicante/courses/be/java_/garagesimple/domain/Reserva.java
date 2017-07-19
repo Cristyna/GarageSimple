@@ -3,6 +3,10 @@ package com.everis.alicante.courses.be.java_.garagesimple.domain;
 import java.util.Date;
 
 public class Reserva {
+	
+	private final String GUION= "-";
+
+	private String codigoReserva;
 
 	private Plaza plaza;
 
@@ -11,6 +15,19 @@ public class Reserva {
 	private Date fechaReserva;
 
 	private Date fechaInicio;
+
+	public String getCodigoReserva() {
+		//logica del codigo de reserva
+		
+							
+		return codigoReserva;
+	}
+
+	
+	public void setCodigoReserva(String codigoReserva) {
+		this.codigoReserva = codigoReserva;
+	}
+
 
 	private Date fechaFin;
 
@@ -58,6 +75,9 @@ public class Reserva {
 
 	public String convierteAFormatoTxt() {
 		String str = "";
+		
+		str = str.concat(String.valueOf(this.getCodigoReserva()));
+		str = str.concat(";");
 		str = str.concat(String.valueOf(this.plaza.getNumeroPlaza()));
 		str = str.concat(";");
 		str = str.concat(this.cliente.getNif());
@@ -69,4 +89,5 @@ public class Reserva {
 		return str;
 	}
 
+	
 }
