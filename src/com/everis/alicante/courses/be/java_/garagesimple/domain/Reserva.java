@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Reserva {
 	
+	@SuppressWarnings("unused")
 	private final String GUION= "-";
 
 	private String codigoReserva;
