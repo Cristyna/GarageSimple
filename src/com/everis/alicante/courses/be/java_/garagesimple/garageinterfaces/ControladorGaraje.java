@@ -1,6 +1,7 @@
 package com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 
 import com.everis.alicante.courses.be.java_.garagesimple.domain.Plaza;
@@ -13,5 +14,6 @@ public interface ControladorGaraje {
 	void listarClientes() throws IOException;	
 	void listarReservas() throws IOException;
 	void listarVehiculos() throws IOException;
+	void listarReservasByFecha(Date fechaInicio, Date fechaFin) throws IOException;
 	 
 }

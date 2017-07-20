@@ -66,6 +66,8 @@ public class ReservaDAOFileImp implements ReservaDAO {
 								
 				reserva.getCliente().setVehiculo(daoVehiculo.readVehiculo(temp[3]));
 				
+				reserva.setFechaReserva(fechaReserva);
+				
 				reservas.put(reserva.getCodigoReserva(),reserva);	
 			
 			}

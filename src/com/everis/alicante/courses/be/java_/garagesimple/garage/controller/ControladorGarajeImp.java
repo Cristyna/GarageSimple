@@ -3,6 +3,7 @@ package com.everis.alicante.courses.be.java_.garagesimple.garage.controller;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
@@ -24,6 +25,7 @@ import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.Im
 import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.Impl.PlazaDAOFileImp;
 import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.Impl.ReservaDAOFileImp;
 import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.DAO.Impl.VehiculoDAOFileImp;
+import com.everis.alicante.courses.be.java_.garagesimple.utils.ValidadorNIF;
 
 public class ControladorGarajeImp implements ControladorGaraje {
 
@@ -81,9 +83,15 @@ public class ControladorGarajeImp implements ControladorGaraje {
 
 		System.out.println("Por favor introduce tus datos para reservar la plaza");
 
-		System.out.println("Introduce tu nif");
+		boolean nifCorrecto = false;
+		String nif = "";
+
+		while (!nifCorrecto)
+
+			System.out.println("Introduce tu nif");
 		Scanner nifEntrada = new Scanner(System.in);
-		String nif = nifEntrada.nextLine();
+		nif = nifEntrada.nextLine();
+		//
 		cliente.setNif(nif);
 
 		System.out.println("Introduce tu nombre completo");
@@ -186,12 +194,11 @@ public class ControladorGarajeImp implements ControladorGaraje {
 
 	}
 
-	
 	@Override
 	public void listarReservas() throws IOException {
-		
+
 		ReservaDAO reservaDAO = new ReservaDAOFileImp();
-		
+
 		Map<String, Reserva> reservas = reservaDAO.readReservas();
 
 		Collection<Reserva> listaReservas = reservas.values();
@@ -206,7 +213,7 @@ public class ControladorGarajeImp implements ControladorGaraje {
 		}
 
 	}
-	
+
 	@Override
 	public void listarVehiculos() throws IOException {
 
@@ -217,6 +224,23 @@ public class ControladorGarajeImp implements ControladorGaraje {
 		for (Vehiculo vehiculo : vehiculos) {
 
 			System.out.println(vehiculo.getMatricula() + "-" + vehiculo.getTipoVehiculo());
+
+		}
+
+	}
+
+	@Override
+	public void listarReservasByFecha(Date fechaInicio, Date fechaFin) throws IOException {
+		
+
+		ReservaDAO reservaDAO = new ReservaDAOFileImp();
+
+		Map<String, Reserva> reservas = reservaDAO.readReservas();
+
+		for (Reserva reserva : reservas.values()) {
+			if (reserva.getFechaReserva().before(fechaFin) && reserva.getFechaReserva().after(fechaInicio)) {
+				System.out.println("Reserva: " + reserva);
+			}
 
 		}
 

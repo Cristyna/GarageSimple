@@ -1,6 +1,8 @@
 package com.everis.alicante.courses.be.java_.garagesimple.garage;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
@@ -11,8 +13,6 @@ import com.everis.alicante.courses.be.java_.garagesimple.garage.controller.Contr
 import com.everis.alicante.courses.be.java_.garagesimple.garageinterfaces.ControladorGaraje;
 
 public class GarageMainProfe {
-
-	
 
 	static Garage garaje;
 
@@ -30,7 +30,7 @@ public class GarageMainProfe {
 
 	private static void iniciarAplicacion() throws IOException {
 		System.out.println("*********************************************************");
-	
+
 		System.out.println("Bienvenido a nuestro garaje, seleccione una opción: ");
 		System.out.println("1: Listar Plazas garaje libres");
 		System.out.println("2: Listar Plazas garaje ocupadas");
@@ -38,66 +38,70 @@ public class GarageMainProfe {
 		System.out.println("4: Listar clientes");
 		System.out.println("5: Listar reservas");
 		System.out.println("6: Listar vehiculos");
+		System.out.println("7: Listar por fecha de reserva");
 
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		Integer opcion = in.nextInt();
 		Boolean resultado = true;
-		Map<Integer,Plaza> mapa=null;
+		Map<Integer, Plaza> mapa = null;
 
 		System.out.println("Ha elegido la opción: " + opcion);
-		
+
 		switch (opcion) {
-		case 1:	
-			mapa = controlador.listarPlazasLibres();			
+		case 1:
+			mapa = controlador.listarPlazasLibres();
 			break;
-		case 2:			
-			controlador.listarPlazasOcupadas();			
+		case 2:
+			controlador.listarPlazasOcupadas();
 			break;
-		case 3:			
-			resultado=controlador.reservarPlaza();			
+		case 3:
+			resultado = controlador.reservarPlaza();
 			break;
-		case 4:			
-			controlador.listarClientes();		
+		case 4:
+			controlador.listarClientes();
 			break;
-		case 5:			
-			controlador.listarReservas();		
+		case 5:
+			controlador.listarReservas();
 			break;
-		case 6:			
-			controlador.listarVehiculos();		
+		case 6:
+			controlador.listarVehiculos();
+			break;
+		case 7:
+			validarFechasEntrada(fechaInicio, fechaFin);
+			controlador.listarReservasByFecha(fechaInicio, fechaFin);
 			break;
 		default:
 			System.out.println("Error");
 			break;
 		}
-	
-	if(opcion==1){
-		
-		for (Iterator<Plaza> iterator = mapa.values().iterator(); iterator.hasNext();) {
-				
-			Plaza plaza = (Plaza) iterator.next();
-			
-			System.out.println("Plaza libre numero: " + plaza.getNumeroPlaza());				
-			
+
+		if (opcion == 1) {
+
+			for (Iterator<Plaza> iterator = mapa.values().iterator(); iterator.hasNext();) {
+
+				Plaza plaza = (Plaza) iterator.next();
+
+				System.out.println("Plaza libre numero: " + plaza.getNumeroPlaza());
+
+			}
 		}
+
+		if (opcion == 3 && resultado) {
+			System.out.println("Se ha reservado su plaza");
+		} else if (opcion == 3) {
+			System.out.println("No hay plazas disponibles");
+		}
+
+		iniciarAplicacion();
+
 	}
-	
-	
-	if(opcion==3&&resultado){
-		System.out.println("Se ha reservado su plaza");
-	}else if (opcion==3){
-		System.out.println("No hay plazas disponibles");
-	}
-		
-	iniciarAplicacion();
-	
-}
 
 	public static void inicializarComponentes() throws IOException {
 
 		garaje = new Garage();
 		controlador = new ControladorGarajeImp();
-		
+
 		// como ya podemos leer de los ficheros ya no necesitamos que la aplicacion lo
 		// guarde en memoria
 
@@ -113,6 +117,49 @@ public class GarageMainProfe {
 		// garaje.setVehiculos(vehiculoDAO.readVehiculo());
 		//
 		// garaje.setReservas(reservaDAO.readReservas());
+
+	}
+
+	public static void validarFechasEntrada(Date fechaInicio, Date fechaFin) {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+		if (fechaInicio == null) {
+
+			System.out.println("Introduce la fecha de inicio para la búsqueda en formato dd/MM/yyyy ");
+			Scanner in = new Scanner(System.in);
+			String tmp = in.nextLine();
+
+			try {
+
+				fechaInicio = formatter.parse(tmp);
+
+				System.out.println("Introduce la fecha de fin para la búsqueda en formato dd/MM/yyyy ");
+				in = new Scanner(System.in);
+				tmp = in.nextLine();
+
+				fechaFin = formatter.parse(tmp);
+
+			} catch (Exception e) {
+
+				System.out.println("La fecha introducida es incorrecta");
+				validarFechasEntrada(fechaInicio, fechaFin);
+			}
+		} else if (fechaFin == null) {
+
+			System.out.println("Introduce la fecha de fin para la búsqueda en formato dd/MM/yyyy ");
+			Scanner in = new Scanner(System.in);
+			String tmp = in.nextLine();
+
+			try {
+
+			} catch (Exception e) {
+
+				System.out.println("La fecha introducida es incorrecta");
+				validarFechasEntrada(fechaInicio, fechaFin);
+			}
+
+		}
 
 	}
 
