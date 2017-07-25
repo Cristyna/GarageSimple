@@ -7,7 +7,7 @@ import com.everis.alicante.courses.be.java_.garagesimple.domain.Cliente;
 
 public interface ClienteDAO {
 
-	Map<String,Cliente> readClientes() throws IOException;
+	 Map<String,Cliente> readClientes() throws IOException;
 	 
 	 void createCliente(Cliente cliente) throws IOException;
 	 

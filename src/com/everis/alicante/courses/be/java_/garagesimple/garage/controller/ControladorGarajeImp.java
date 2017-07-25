@@ -1,6 +1,7 @@
 package com.everis.alicante.courses.be.java_.garagesimple.garage.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -30,7 +31,7 @@ import com.everis.alicante.courses.be.java_.garagesimple.utils.ValidadorNIF;
 public class ControladorGarajeImp implements ControladorGaraje {
 
 	@Override
-	public Map<Integer, Plaza> listarPlazasLibres() throws IOException {
+	public Map<Integer, Plaza> listarPlazasLibres() throws IOException, ParseException {
 
 		PlazaDAO plazaDao = new PlazaDAOFileImp();
 
@@ -51,7 +52,7 @@ public class ControladorGarajeImp implements ControladorGaraje {
 	}
 
 	@Override
-	public void listarPlazasOcupadas() throws IOException {
+	public void listarPlazasOcupadas() throws IOException, ParseException {
 
 		ReservaDAO reservaDAO = new ReservaDAOFileImp();
 
@@ -68,7 +69,7 @@ public class ControladorGarajeImp implements ControladorGaraje {
 	}
 
 	@Override
-	public boolean reservarPlaza() throws IOException {
+	public boolean reservarPlaza() throws IOException, ParseException {
 
 		// logica de crear cliente
 		Cliente cliente = new Cliente();
@@ -86,12 +87,16 @@ public class ControladorGarajeImp implements ControladorGaraje {
 		boolean nifCorrecto = false;
 		String nif = "";
 
-		while (!nifCorrecto)
+		while (!nifCorrecto) {
 
-			System.out.println("Introduce tu nif");
-		Scanner nifEntrada = new Scanner(System.in);
-		nif = nifEntrada.nextLine();
-		//
+			System.out.println("Inserte el nif del cliente");
+			Scanner in = new Scanner(System.in);
+			nif = in.nextLine();
+			nifCorrecto = ValidadorNIF.validaNif(nif);
+			if (nifCorrecto == false) {
+				System.out.println("NIF INCORRECTO");
+			}
+		}
 		cliente.setNif(nif);
 
 		System.out.println("Introduce tu nombre completo");
@@ -108,6 +113,7 @@ public class ControladorGarajeImp implements ControladorGaraje {
 		Scanner in = new Scanner(System.in);
 
 		switch (in.nextInt()) {
+
 		case 1:
 			vehiculo = new Coche();
 			break;
@@ -195,7 +201,7 @@ public class ControladorGarajeImp implements ControladorGaraje {
 	}
 
 	@Override
-	public void listarReservas() throws IOException {
+	public void listarReservas() throws IOException, ParseException {
 
 		ReservaDAO reservaDAO = new ReservaDAOFileImp();
 
@@ -230,16 +236,20 @@ public class ControladorGarajeImp implements ControladorGaraje {
 	}
 
 	@Override
-	public void listarReservasByFecha(Date fechaInicio, Date fechaFin) throws IOException {
-		
+	public void listarReservasByFecha(Date fechaInicio, Date fechaFin) throws IOException, ParseException {
 
 		ReservaDAO reservaDAO = new ReservaDAOFileImp();
 
 		Map<String, Reserva> reservas = reservaDAO.readReservas();
 
 		for (Reserva reserva : reservas.values()) {
-			if (reserva.getFechaReserva().before(fechaFin) && reserva.getFechaReserva().after(fechaInicio)) {
+
+			if (reserva.getFechaReserva().before(fechaFin) &&
+
+					reserva.getFechaReserva().after(fechaInicio)) {
+
 				System.out.println("Reserva: " + reserva);
+
 			}
 
 		}

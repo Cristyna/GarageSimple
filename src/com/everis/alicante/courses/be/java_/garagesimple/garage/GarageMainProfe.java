@@ -1,6 +1,7 @@
 package com.everis.alicante.courses.be.java_.garagesimple.garage;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -17,8 +18,11 @@ public class GarageMainProfe {
 	static Garage garaje;
 
 	static ControladorGaraje controlador;
+	// declaracion de las fechas como atributos estáticos de la clase:
+	static Date fechaInicio = null;
+	static Date fechaFin = null;
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 		// inicializar los componentes de la aplicación
 		inicializarComponentes();
 
@@ -28,7 +32,7 @@ public class GarageMainProfe {
 
 	}
 
-	private static void iniciarAplicacion() throws IOException {
+	private static void iniciarAplicacion() throws IOException, ParseException {
 		System.out.println("*********************************************************");
 
 		System.out.println("Bienvenido a nuestro garaje, seleccione una opción: ");
@@ -47,7 +51,9 @@ public class GarageMainProfe {
 		Map<Integer, Plaza> mapa = null;
 
 		System.out.println("Ha elegido la opción: " + opcion);
-
+		
+		try {
+			
 		switch (opcion) {
 		case 1:
 			mapa = controlador.listarPlazasLibres();
@@ -68,7 +74,7 @@ public class GarageMainProfe {
 			controlador.listarVehiculos();
 			break;
 		case 7:
-			validarFechasEntrada(fechaInicio, fechaFin);
+			validarFechasEntrada();
 			controlador.listarReservasByFecha(fechaInicio, fechaFin);
 			break;
 		default:
@@ -94,6 +100,10 @@ public class GarageMainProfe {
 		}
 
 		iniciarAplicacion();
+		
+		} catch (Exception e) {
+			
+		}
 
 	}
 
@@ -120,43 +130,47 @@ public class GarageMainProfe {
 
 	}
 
-	public static void validarFechasEntrada(Date fechaInicio, Date fechaFin) {
+	public static void validarFechasEntrada() {
 
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-
-		if (fechaInicio == null) {
-
-			System.out.println("Introduce la fecha de inicio para la búsqueda en formato dd/MM/yyyy ");
+SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy");
+		
+		if(fechaInicio==null){
+		
+			System.out.println("Introduce la fecha de Inicio para la busqueda en formato dd/MM/yyyy: ");
+			@SuppressWarnings("resource")
 			Scanner in = new Scanner(System.in);
-			String tmp = in.nextLine();
-
-			try {
-
-				fechaInicio = formatter.parse(tmp);
-
-				System.out.println("Introduce la fecha de fin para la búsqueda en formato dd/MM/yyyy ");
+			String tmp=in.nextLine();		
+			
+			try {			
+				fechaInicio=formatter.parse(tmp);	
+				
+				System.out.println("Introduce la fecha de Fin para la busqueda en formato dd/MM/yyyy: ");
 				in = new Scanner(System.in);
-				tmp = in.nextLine();
-
-				fechaFin = formatter.parse(tmp);
-
+				tmp=in.nextLine();
+				
+				fechaFin=formatter.parse(tmp);
+				
 			} catch (Exception e) {
-
+				
 				System.out.println("La fecha introducida es incorrecta");
-				validarFechasEntrada(fechaInicio, fechaFin);
+				validarFechasEntrada();
 			}
-		} else if (fechaFin == null) {
-
-			System.out.println("Introduce la fecha de fin para la búsqueda en formato dd/MM/yyyy ");
+		}
+		else if(fechaFin==null){
+			
+			System.out.println("Introduce la fecha de Fin para la busqueda en formato dd/MM/yyyy: ");
+			@SuppressWarnings("resource")
 			Scanner in = new Scanner(System.in);
 			String tmp = in.nextLine();
-
+			
 			try {
-
-			} catch (Exception e) {
-
+				
+				fechaFin=formatter.parse(tmp);
+				
+			} catch (ParseException e) {	
+				
 				System.out.println("La fecha introducida es incorrecta");
-				validarFechasEntrada(fechaInicio, fechaFin);
+				validarFechasEntrada();
 			}
 
 		}
